@@ -13,19 +13,16 @@ buttonEdit.onclick = function() {
   let subtitle = profileSubTitle.innerText; 
   popupInputName.value = title;
   popupInputDescription.value = subtitle;
-  console.log('Кнопка нажата', title, subtitle);
   popup.classList.add('popup_opened');
 }
 
 popupClose.onclick = function() {
-  console.log('Кнопка нажата');
   popup.classList.remove('popup_opened');
 }
 
 let formElement = document.querySelector('form');
 formElement.addEventListener('submit', function(e) {
   e.preventDefault();
-  console.log(e);
   let inputName = popupInputName.value;
   let inputDescription = popupInputDescription.value;
   profileTitle.innerText = inputName;
