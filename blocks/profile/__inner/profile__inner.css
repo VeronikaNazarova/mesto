@@ -1,0 +1,10 @@
+.profile__inner {
+  display: flex;
+  align-items: center;
+}
+
+@media screen  and (max-width: 432px) {
+  .profile__inner {
+    margin: auto;
+  }
+}

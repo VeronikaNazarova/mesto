@@ -1,0 +1,10 @@
+.header {
+  border-bottom: 1px solid #545454;
+}
+
+@media screen  and (max-width: 568px) {
+  .header {
+      margin-left: -19px;
+      margin-right: -19px;
+    }
+}
