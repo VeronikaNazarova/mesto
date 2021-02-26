@@ -8,7 +8,7 @@ let popupInputDescription = document.querySelector('[name=description]');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubTitle = document.querySelector('.profile__subtitle');
 
-buttonEdit.onclick = function() {
+buttonEdit.addEventListener= function() {
   let title = profileTitle.innerText;
   let subtitle = profileSubTitle.innerText; 
   popupInputName.value = title;
@@ -16,7 +16,7 @@ buttonEdit.onclick = function() {
   popup.classList.add('popup_opened');
 }
 
-popupClose.onclick = function() {
+popupClose.addEventListener = function() {
   popup.classList.remove('popup_opened');
 }
 
