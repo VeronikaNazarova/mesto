@@ -10,18 +10,6 @@
   overflow: hidden;
 }
 
-@media screen  and (max-width: 1184px) {
-  .element__title {
-    font-size: 18px;
-  }
-}
-
-@media screen  and (max-width: 1044px) {
-  .element__title {
-    font-size: 24px;
-  }
-}
-
 @media screen  and (max-width: 985px) {
   .element__title {
     font-size: 18px;

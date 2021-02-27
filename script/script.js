@@ -8,17 +8,17 @@ let popupInputDescription = document.querySelector('[name=description]');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubTitle = document.querySelector('.profile__subtitle');
 
-buttonEdit.addEventListener= function() {
+buttonEdit.addEventListener('click', function() {
   let title = profileTitle.innerText;
   let subtitle = profileSubTitle.innerText; 
   popupInputName.value = title;
   popupInputDescription.value = subtitle;
   popup.classList.add('popup_opened');
-}
+})
 
-popupClose.addEventListener = function() {
+popupClose.addEventListener('click', function() {
   popup.classList.remove('popup_opened');
-}
+})
 
 let formElement = document.querySelector('form');
 formElement.addEventListener('submit', function(e) {
