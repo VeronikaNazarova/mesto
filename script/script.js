@@ -66,6 +66,7 @@ const popupAddClose = document.querySelector('.popupAdd__icon');
 const popupAddOpen = document.querySelector('.popupAdd_opened');
 const formAdd = document.querySelector('.popupAdd__container');
 const templateElement = document.querySelector('.template');
+const popupImg = document.querySelector('.popup-photo');
 
 buttonAdd.addEventListener('click', function() {
   popupAdd.classList.add('popupAdd_opened');
@@ -91,15 +92,16 @@ function createTaskDomNode(item){
   const image = newItem.querySelector('.element__image');
 
   const likeElement = newItem.querySelector('.element__like');
-    likeElement.addEventListener('.click', function() {
+    likeElement.addEventListener('click', function() {
       likeElement.classList.toggle('element__like_active');
       });
   image.src = item.link;
   title.textContent = item.name;
   
   const popupImgInner = document.querySelector('.popup-img__inner');
-  const popupImg = document.querySelector('.popup-photo');
+  
   image.addEventListener('click', function(e) {
+    e.preventDefault();
     popupImgInner.src = e.target.src;
       popupImg.classList.add('popup-img_opened');
       })
@@ -119,6 +121,12 @@ function renderList() {
 
   elements.append(...result);
 }
+
+const popupImgClose = document.querySelector('.popup-img__icon');
+
+popupImgClose.addEventListener('click', function() {
+  popupImg.classList.remove('popup-img_opened');
+})
 
 function addTaskForm(e) {
   e.preventDefault();
