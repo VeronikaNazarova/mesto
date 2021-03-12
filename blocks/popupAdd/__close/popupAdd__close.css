@@ -1,0 +1,11 @@
+.popupAdd__close {
+  width: 58px;
+  height: 58px;
+}
+
+@media screen  and (min-width: 320px) and (max-width: 568px) {
+  .popupAdd__close {
+    width: 38px;
+    height: 38px;
+  }
+}

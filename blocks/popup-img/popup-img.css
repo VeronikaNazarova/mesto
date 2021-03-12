@@ -1,0 +1,12 @@
+.popup-img {
+  box-sizing: border-box;
+  max-width: 75vw;
+  max-height: 75vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+

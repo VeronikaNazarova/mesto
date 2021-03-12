@@ -1,0 +1,17 @@
+.popupAdd__icon {
+  position: absolute;
+  top: -50px;
+  left: 416px;
+  background: none;
+  border: none;
+}
+
+.popupAdd__icon:hover {
+  opacity: 0.6;
+}
+
+@media screen  and (min-width: 320px) and (max-width: 568px) {
+  .popupAdd__icon {
+    left: 240px;
+  }
+}
