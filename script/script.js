@@ -1,35 +1,62 @@
 
-let buttonEdit = document.querySelector('.profile__button-edit');
-let popupClose = document.querySelector('.popup__icon');
-let popup = document.querySelector('.popup');
-let popupOpen = document.querySelector('.popup_opened');
-let popupInputName = document.querySelector('[name=name]');
-let popupInputDescription = document.querySelector('[name=description]');
-let profileTitle = document.querySelector('.profile__title');
-let profileSubTitle = document.querySelector('.profile__subtitle');
+const buttonEdit = document.querySelector('.profile__button-edit');
+const popupClose = document.querySelector('.popup__icon');
+const popup = document.querySelector('.popup');
+const popupOpen = document.querySelector('.popup_opened');
+const popupInputName = document.querySelector('[name=name]');
+const popupInputDescription = document.querySelector('[name=description]');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubTitle = document.querySelector('.profile__subtitle');
+const formElement = document.querySelector('.popup__container');
+
+const elements = document.querySelector('.elements');
+const buttonAdd = document.querySelector('.profile__button-add');
+const popupAdd = document.querySelector('.popupAdd');
+const popupAddClose = document.querySelector('.popupAdd__icon');
+const formAdd = document.querySelector('.popupAdd__container');
+const templateElement = document.querySelector('.template');
+const popupImg = document.querySelector('.popup-photo');
+const popupImgInner = document.querySelector('.popup-img__inner');
+const inputAddName = formAdd.querySelector('.popupAdd__input-name');
+const inputAddImage = formAdd.querySelector('.popupAdd__input-image');
+const popupImgClose = document.querySelector('.popup-img__icon');
+
+function closeModal(modal) {
+  modal.classList.remove('popup_opened');
+}
+
+function openModal(modal) {
+  modal.classList.add('popup_opened');
+}
 
 buttonEdit.addEventListener('click', function() {
-  let title = profileTitle.innerText;
-  let subtitle = profileSubTitle.innerText; 
+  const title = profileTitle.innerText;
+  const subtitle = profileSubTitle.innerText; 
   popupInputName.value = title;
   popupInputDescription.value = subtitle;
-  popup.classList.add('popup_opened');
+  openModal(popup);
 })
-
 
 popupClose.addEventListener('click', function() {
-  popup.classList.remove('popup_opened');
+  closeModal(popup);
 })
 
-let formElement = document.querySelector('.popup__container');
 formElement.addEventListener('submit', function(e) {
   e.preventDefault();
-  let inputName = popupInputName.value;
-  let inputDescription = popupInputDescription.value;
+  const inputName = popupInputName.value;
+  const inputDescription = popupInputDescription.value;
   profileTitle.innerText = inputName;
   profileSubTitle.innerText = inputDescription;
-  popup.classList.remove('popup_opened');
+  closeModal(popup);
 
+})
+
+buttonAdd.addEventListener('click', function() {
+  openModal(popupAdd);
+})
+
+popupAddClose.addEventListener('click', function() {
+  closeModal(popupAdd);
 })
 
 const initialCards = [
@@ -59,34 +86,17 @@ const initialCards = [
   }
 ];
 
-const elements = document.querySelector('.elements');
-const buttonAdd = document.querySelector('.profile__button-add');
-const popupAdd = document.querySelector('.popupAdd');
-const popupAddClose = document.querySelector('.popupAdd__icon');
-const popupAddOpen = document.querySelector('.popupAdd_opened');
-const formAdd = document.querySelector('.popupAdd__container');
-const templateElement = document.querySelector('.template');
-const popupImg = document.querySelector('.popup-photo');
 
-buttonAdd.addEventListener('click', function() {
-  popupAdd.classList.add('popupAdd_opened');
-})
-
-popupAddClose.addEventListener('click', function() {
-  popupAdd.classList.remove('popupAdd_opened');
-})
-
-
-function deleteTaskHandler(e) {
+function deleteCardHandler(e) {
   e.target.closest('.element').remove();
 }
 
-function addTaskListeners(task) {
-  const deleteButton = task.querySelector('.element__delete');
-  deleteButton.addEventListener('click', deleteTaskHandler);
+function addCardListeners(card) {
+  const deleteButton = card.querySelector('.element__delete');
+  deleteButton.addEventListener('click', deleteCardHandler);
 }
 
-function createTaskDomNode(item){
+function createCardDomNode(item){
   const newItem = templateElement.content.cloneNode(true);
   const title = newItem.querySelector('.element__title');
   const image = newItem.querySelector('.element__image');
@@ -97,8 +107,6 @@ function createTaskDomNode(item){
       });
   image.src = item.link;
   title.textContent = item.name;
-  
-  const popupImgInner = document.querySelector('.popup-img__inner');
   
   image.addEventListener('click', function(e) {
     e.preventDefault();
@@ -111,41 +119,35 @@ function createTaskDomNode(item){
 
 function renderList() {
   const result = initialCards.map(function(item) {
-    const newTask = createTaskDomNode(item);
-    addTaskListeners(newTask);
-    return newTask;
-    
+    const newCard = createCardDomNode(item);
+    addCardListeners(newCard);
+    return newCard;
   });
-
   
-
   elements.append(...result);
 }
-
-const popupImgClose = document.querySelector('.popup-img__icon');
 
 popupImgClose.addEventListener('click', function() {
   popupImg.classList.remove('popup-img_opened');
 })
 
-function addTaskForm(e) {
+function addCardForm(e) {
   e.preventDefault();
-  const inputAddName = formAdd.querySelector('.popupAdd__input-name');
-  const inputAddImage = formAdd.querySelector('.popupAdd__input-image');
+  
 
   const inputAddTitle = inputAddName.value;
   const inputAddPhoto = inputAddImage.value;
-  const newTask = createTaskDomNode({ name: inputAddTitle, link: inputAddPhoto });
+  const newCard = createCardDomNode({ name: inputAddTitle, link: inputAddPhoto });
   
-  addTaskListeners(newTask);
-  elements.prepend(newTask);
+  addCardListeners(newCard);
+  elements.prepend(newCard);
   inputAddName.value = '';
-  popupAdd.classList.remove('popupAdd_opened');
+  popupAdd.classList.remove('popup_opened');
 }
 
 renderList();
 
-formAdd.addEventListener('submit', addTaskForm);
+formAdd.addEventListener('submit', addCardForm);
 
 
 
