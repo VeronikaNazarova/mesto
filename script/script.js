@@ -87,31 +87,28 @@ const initialCards = [
 ];
 
 
-function deleteCardHandler(e) {
-  e.target.closest('.element').remove();
-}
-
-function addCardListeners(card) {
-  const deleteButton = card.querySelector('.element__delete');
-  deleteButton.addEventListener('click', deleteCardHandler);
-}
-
 function createCardDomNode(item){
   const newItem = templateElement.content.cloneNode(true);
   const title = newItem.querySelector('.element__title');
   const image = newItem.querySelector('.element__image');
 
+  const deleteButton = newItem.querySelector('.element__delete');
+  deleteButton.addEventListener('click', function(e) {
+    e.target.closest('.element').remove();
+  });
+
   const likeElement = newItem.querySelector('.element__like');
-    likeElement.addEventListener('click', function() {
-      likeElement.classList.toggle('element__like_active');
-      });
+  likeElement.addEventListener('click', function() {
+    likeElement.classList.toggle('element__like_active');
+  });
+
   image.src = item.link;
   title.textContent = item.name;
   
   image.addEventListener('click', function(e) {
     e.preventDefault();
     popupImgInner.src = e.target.src;
-      popupImg.classList.add('popup-img_opened');
+    openModal(popupImg);
       })
 
   return newItem;
@@ -120,7 +117,6 @@ function createCardDomNode(item){
 function renderList() {
   const result = initialCards.map(function(item) {
     const newCard = createCardDomNode(item);
-    addCardListeners(newCard);
     return newCard;
   });
   
@@ -128,7 +124,7 @@ function renderList() {
 }
 
 popupImgClose.addEventListener('click', function() {
-  popupImg.classList.remove('popup-img_opened');
+  closeModal(popupImg);
 })
 
 function addCardForm(e) {
@@ -139,10 +135,10 @@ function addCardForm(e) {
   const inputAddPhoto = inputAddImage.value;
   const newCard = createCardDomNode({ name: inputAddTitle, link: inputAddPhoto });
   
-  addCardListeners(newCard);
+
   elements.prepend(newCard);
   inputAddName.value = '';
-  popupAdd.classList.remove('popup_opened');
+  closeModal(popupAdd);
 }
 
 renderList();
