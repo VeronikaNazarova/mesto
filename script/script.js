@@ -144,8 +144,3 @@ function addCardForm(e) {
 renderList();
 
 formAdd.addEventListener('submit', addCardForm);
-
-
-
-
-
