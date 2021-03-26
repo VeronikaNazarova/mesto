@@ -20,6 +20,9 @@ const popupImgInner = document.querySelector('.popup-img__inner');
 const inputAddName = formAdd.querySelector('.popupAdd__input-name');
 const inputAddImage = formAdd.querySelector('.popupAdd__input-image');
 const popupImgClose = document.querySelector('.popup-img__icon');
+const overlayPopup = document.querySelector('.overlay');
+const overlayAddPopup = document.querySelector('.overlayAdd');
+const overlayPhotoPopup = document.querySelector('.overlay-photo');
 
 function closeModal(modal) {
   modal.classList.remove('popup_opened');
@@ -144,3 +147,35 @@ function addCardForm(e) {
 renderList();
 
 formAdd.addEventListener('submit', addCardForm);
+
+
+function togglePopup(overlay) {
+  if (overlay.classList.contains('popup_opened')) {
+    console.log('ggg');
+  }
+
+  overlay.focus();
+  overlay.classList.remove('popup_opened');
+}
+
+overlayPopup.addEventListener('click', function() {
+  togglePopup(overlayPopup);
+});
+
+overlayAddPopup.addEventListener('click', function() {
+  togglePopup(overlayAddPopup);
+});
+
+overlayPhotoPopup.addEventListener('click', function() {
+  togglePopup(overlayPhotoPopup);
+});
+
+function stopOverlay(evt) {
+  evt.stopPropagation();
+}
+
+document.querySelector('.popup__container').addEventListener('click', stopOverlay);
+
+document.querySelector('.popupAdd__container').addEventListener('click', stopOverlay);
+
+document.querySelector('.popup-img').addEventListener('click', stopOverlay);
