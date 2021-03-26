@@ -1,7 +1,7 @@
 
 
 const hasInvalidInput = (inputList) => {
-  inputList.some(inputElement => !inputElement.validity.valid);
+   return inputList.some(inputElement => !inputElement.validity.valid);
 };
 
 

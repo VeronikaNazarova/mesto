@@ -7,13 +7,13 @@ const popupInputName = document.querySelector('[name=name]');
 const popupInputDescription = document.querySelector('[name=description]');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubTitle = document.querySelector('.profile__subtitle');
-const formElement = document.querySelector('.popup__container');
+const formElement = document.querySelector('[name="popup-form"]');
 
 const elements = document.querySelector('.elements');
 const buttonAdd = document.querySelector('.profile__button-add');
 const popupAdd = document.querySelector('.popupAdd');
 const popupAddClose = document.querySelector('.popupAdd__icon');
-const formAdd = document.querySelector('.popupAdd__container');
+const formAdd = document.querySelector('[name="popupAdd-form"]');
 const templateElement = document.querySelector('.template');
 const popupImg = document.querySelector('.popup-photo');
 const popupImgInner = document.querySelector('.popup-img__inner');
