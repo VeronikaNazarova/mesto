@@ -150,9 +150,7 @@ formAdd.addEventListener('submit', addCardForm);
 
 
 function togglePopup(overlay) {
-  if (overlay.classList.contains('popup_opened')) {
-    console.log('ggg');
-  }
+  if (overlay.classList.contains('popup_opened')) {}
 
   overlay.focus();
   overlay.classList.remove('popup_opened');
