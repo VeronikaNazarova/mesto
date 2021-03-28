@@ -3,3 +3,10 @@
   top: 209px;
   left: 36px;
 }
+
+
+@media screen  and (min-width: 320px) and (max-width: 568px) {
+  .error_bottom {
+    top: 215px;
+  }
+}

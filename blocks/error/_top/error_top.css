@@ -3,3 +3,9 @@
   top: 149px;
   left: 36px;
 }
+
+@media screen  and (min-width: 320px) and (max-width: 568px) {
+  .error_top {
+    top: 155px;
+  }
+}

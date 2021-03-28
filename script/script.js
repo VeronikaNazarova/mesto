@@ -153,7 +153,7 @@ function togglePopup(overlay) {
   if (overlay.classList.contains('popup_opened')) {}
 
   overlay.focus();
-  overlay.classList.remove('popup_opened');
+  closeModal(overlay);
 }
 
 overlayPopup.addEventListener('click', function() {
@@ -177,3 +177,20 @@ document.querySelector('.popup__container').addEventListener('click', stopOverla
 document.querySelector('.popupAdd__container').addEventListener('click', stopOverlay);
 
 document.querySelector('.popup-img').addEventListener('click', stopOverlay);
+
+
+const keyHandler = (data) => (evt) => {
+  if (evt.keyCode === 27) {
+    const openPopupArray = document.querySelectorAll('.popup_opened');
+    openPopupArray.forEach(function(evt) {
+      closeModal(evt);
+    });
+  }
+}
+
+
+function keyDownHandler() {
+document.addEventListener('keydown', keyHandler());
+}
+
+keyDownHandler();
