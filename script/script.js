@@ -21,6 +21,7 @@ const popupImgInner = document.querySelector('.popup-img__inner');
 const textPopupWithImg = document.querySelector('.popup-img__title');
 const inputAddName = formAdd.querySelector('.popupAdd__input-name');
 const inputAddImage = formAdd.querySelector('.popupAdd__input-image');
+const buttonSubmitAdd = formAdd.querySelector('.popupAdd__button');
 const popupImgClose = document.querySelector('.popup-img__icon');
 const overlayPopup = document.querySelector('.overlay');
 const overlayAddPopup = document.querySelector('.overlayAdd');
@@ -62,6 +63,7 @@ formElement.addEventListener('submit', function(e) {
 })
 
 buttonAdd.addEventListener('click', function() {
+  toggleButtonState(buttonSubmitAdd, true, configClassValidate);
   openModal(popupAdd);
 })
 
