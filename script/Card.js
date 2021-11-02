@@ -4,6 +4,7 @@ export class Card {
     this._initialCards = initialCards;
     this._templateSelector = templateSelector;
     this._element = null;
+    this._popup = document.querySelector('.popup-photo');
   }
 
   _getTemplate() {
@@ -39,16 +40,22 @@ export class Card {
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._handleCardDelete();
     });
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleCardDelete();
+    this._element.querySelector('.element__link').addEventListener('click', () => {
+      this._openPopupImage();
     });
   }
 
   _handleCardClick() {
-    this._element.querySelector('.element__like').classList.toggle('.element__like_active');
+    this._element.querySelector('.element__like').classList.toggle('element__like_active');
   }
 
   _handleCardDelete() {
-    this._element.querySelector('.element__delete').target.closest('.element').remove();
+    this._element.querySelector('.element__delete').closest('.element').remove();
+  }
+
+  _openPopupImage() {
+    this._popup.querySelector('.popup-img__inner').src = this._initialCards.link;
+    this._popup.querySelector('.popup-img__title').textContent = this._initialCards.name;
+    this._popup.classList.add('popup_opened');
   }
 }
