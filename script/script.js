@@ -1,6 +1,8 @@
 
+
 import {Card} from "./Card.js";
-//import {configClassValidate, FormValidator} from "./FormValidator.js";
+import {configClassValidate, FormValidator} from "./FormValidator.js";
+
 
 const initialCards = [
   {
@@ -34,8 +36,6 @@ const cardItem = document.querySelector('.elements');
 const buttonEdit = document.querySelector('.profile__button-edit');
 const popupClose = document.querySelector('.popup__icon');
 const profilePopup = document.querySelector('.overlay');
-const popup = document.querySelector('.popup');
-const popupOpen = document.querySelector('.popup_opened');
 const popupInputName = document.querySelector('[name=name]');
 const popupInputDescription = document.querySelector('[name=description]');
 const profileTitle = document.querySelector('.profile__title');
@@ -46,14 +46,6 @@ const buttonAdd = document.querySelector('.profile__button-add');
 const popupAdd = document.querySelector('.popupAdd');
 const popupAddClose = document.querySelector('.popupAdd__icon');
 const formAdd = document.querySelector('[name="popupAdd-form"]');
-const templateElement = document.querySelector('.template');
-const popupImg = document.querySelector('.popup-photo');
-const popupImgInner = document.querySelector('.popup-img__inner');
-const textPopupWithImg = document.querySelector('.popup-img__title');
-const inputAddName = formAdd.querySelector('.popupAdd__input-name');
-const inputAddImage = formAdd.querySelector('.popupAdd__input-image');
-const buttonSubmitAdd = formAdd.querySelector('.popupAdd__button');
-const popupImgClose = document.querySelector('.popup-img__icon');
 const overlayPopup = document.querySelector('.overlay');
 const overlayAddPopup = document.querySelector('.overlayAdd');
 const overlayPhotoPopup = document.querySelector('.overlay-photo');
@@ -93,7 +85,7 @@ formElement.addEventListener('submit', function(e) {
 })
 
  buttonAdd.addEventListener('click', function() {
-   //toggleButtonState(buttonSubmitAdd, true, configClassValidate);
+  formValidatorAdd.buttonBlock();
    openModal(popupAdd);
  })
 
@@ -137,13 +129,13 @@ document.querySelector('.popupAdd__container').addEventListener('click', stopOve
 
 document.querySelector('.popup-img').addEventListener('click', stopOverlay);
 
-//начальные карточки
+//карточки из массива
 initialCards.forEach(function(item) {
   const card = new Card(item, '.template').render();
   cardItem.append(card);
 });
 
-// //новый карточки
+//новые карточки
 const createCardDomNode = (evt) => {
  evt.preventDefault();
  const data = {
