@@ -1,12 +1,13 @@
+import {popupPhoto, openModal, popupImagesClose} from "./script.js"
+
 export class Card {
   
   constructor(initialCards, templateSelector) {
     this._initialCards = initialCards;
     this._templateSelector = templateSelector;
     this._element = null;
-    this._popup = document.querySelector('.popup-photo');
+    this._popup = popupPhoto;
   }
-
   _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
       const cardElement = document
@@ -28,6 +29,7 @@ export class Card {
     // Добавим данные
     this._element.querySelector('.element__image').src = this._initialCards.link;
     this._element.querySelector('.element__title').textContent = this._initialCards.name;
+    this._element.querySelector('.element__image').alt = this._initialCards.name;
   
     // Вернём элемент наружу
     return this._element;
@@ -56,6 +58,7 @@ export class Card {
   _openPopupImage() {
     this._popup.querySelector('.popup-img__inner').src = this._initialCards.link;
     this._popup.querySelector('.popup-img__title').textContent = this._initialCards.name;
-    this._popup.classList.add('popup_opened');
+    openModal(this._popup);
+    popupImagesClose();
   }
 }

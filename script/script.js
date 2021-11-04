@@ -1,7 +1,7 @@
 
 
 import {Card} from "./Card.js";
-import {configClassValidate, FormValidator} from "./FormValidator.js";
+//import {configClassValidate, FormValidator} from "./FormValidator.js";
 
 
 const initialCards = [
@@ -33,8 +33,10 @@ const initialCards = [
 
 
 const cardItem = document.querySelector('.elements');
+const popupPhoto = document.querySelector('.popup-photo');
 const buttonEdit = document.querySelector('.profile__button-edit');
 const popupClose = document.querySelector('.popup__icon');
+const popupImgClose = document.querySelector('.popup-img__icon');
 const profilePopup = document.querySelector('.overlay');
 const popupInputName = document.querySelector('[name=name]');
 const popupInputDescription = document.querySelector('[name=description]');
@@ -70,9 +72,9 @@ buttonEdit.addEventListener('click', function() {
   openModal(profilePopup);
 })
 
-popupClose.addEventListener('click', function() {
-  closeModal(profilePopup);
-})
+ popupClose.addEventListener('click', function() {
+   closeModal(profilePopup);
+ })
 
 formElement.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -85,13 +87,13 @@ formElement.addEventListener('submit', function(e) {
 })
 
  buttonAdd.addEventListener('click', function() {
-  formValidatorAdd.buttonBlock();
+  formValidatorAdd.disableButton();
    openModal(popupAdd);
  })
 
-popupAddClose.addEventListener('click', function() {
-  closeModal(popupAdd);
-})
+ popupAddClose.addEventListener('click', function() {
+   closeModal(popupAdd);
+ })
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -100,12 +102,20 @@ function closeByEscape(evt) {
   }
 }
 
-function togglePopup(overlay) {
-  if (overlay.classList.contains('popup_opened')) {}
+popupAddClose.addEventListener('click', function() {
+  closeModal(popupAdd);
+})
 
-  overlay.focus();
-  closeModal(overlay);
+function popupImagesClose() {
+  popupImgClose.addEventListener('click', function() {
+    closeModal(popupPhoto);
+  })
 }
+
+ function togglePopup(overlay) {
+   overlay.focus();
+   closeModal(overlay);
+ }
 
 overlayPopup.addEventListener('click', function() {
   togglePopup(overlayPopup);
@@ -129,11 +139,16 @@ document.querySelector('.popupAdd__container').addEventListener('click', stopOve
 
 document.querySelector('.popup-img').addEventListener('click', stopOverlay);
 
-//карточки из массива
-initialCards.forEach(function(item) {
+function createCard(item) {
   const card = new Card(item, '.template').render();
-  cardItem.append(card);
-});
+  return card;
+}
+
+
+initialCards.forEach((item) => {
+  cardItem.append(createCard(item))
+})
+
 
 //новые карточки
 const createCardDomNode = (evt) => {
@@ -142,8 +157,7 @@ const createCardDomNode = (evt) => {
    name: document.querySelector('.popupAdd__input-name').value,
    link: document.querySelector('.popupAdd__input-image').value
  }
- const card = new Card(data, '.template').render();
- cardItem.prepend(card);
+ cardItem.prepend(createCard(item));
  evt.currentTarget.reset();
  closeModal(popupAdd);
 } 
@@ -158,3 +172,5 @@ const formValidatorAdd = new FormValidator(configClassValidate, '.popupAdd__cont
 
 formValidator.enableValidation();
 formValidatorAdd.enableValidation();
+
+export {popupPhoto, openModal, popupImagesClose};

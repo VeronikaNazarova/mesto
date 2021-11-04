@@ -24,16 +24,15 @@ export class FormValidator {
         return !inputElement.validity.valid;
    })
     if (formIsValid) {
-       this._submitButton.classList.add(this._inactiveButtonClass);
-        this._submitButton.setAttribute('disabled', true);
+        this.disableButton();
     }
     else {
         this._submitButton.classList.remove(this._inactiveButtonClass);
        this._submitButton.removeAttribute('disabled');
     }
-  }
-
-  buttonBlock = () => {
+  } 
+  
+  disableButton = () => {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.setAttribute('disabled', true);
   }
