@@ -157,7 +157,7 @@ const createCardDomNode = (evt) => {
    name: document.querySelector('.popupAdd__input-name').value,
    link: document.querySelector('.popupAdd__input-image').value
  }
- cardItem.prepend(createCard(item));
+ cardItem.prepend(createCard(data));
  evt.currentTarget.reset();
  closeModal(popupAdd);
 } 
