@@ -1,7 +1,7 @@
 
 
 import {Card} from "./Card.js";
-//import {configClassValidate, FormValidator} from "./FormValidator.js";
+import {configClassValidate, FormValidator} from "./FormValidator.js";
 
 
 const initialCards = [
@@ -106,11 +106,11 @@ popupAddClose.addEventListener('click', function() {
   closeModal(popupAdd);
 })
 
-function popupImagesClose() {
-  popupImgClose.addEventListener('click', function() {
-    closeModal(popupPhoto);
-  })
-}
+
+popupImgClose.addEventListener('click', function() {
+  closeModal(popupPhoto);
+})
+
 
  function togglePopup(overlay) {
    overlay.focus();
@@ -173,4 +173,4 @@ const formValidatorAdd = new FormValidator(configClassValidate, '.popupAdd__cont
 formValidator.enableValidation();
 formValidatorAdd.enableValidation();
 
-export {popupPhoto, openModal, popupImagesClose};
+export {popupPhoto, openModal};

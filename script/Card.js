@@ -1,4 +1,4 @@
-import {popupPhoto, openModal, popupImagesClose} from "./script.js"
+import {popupPhoto, openModal} from "./script.js"
 
 export class Card {
   
@@ -59,6 +59,5 @@ export class Card {
     this._popup.querySelector('.popup-img__inner').src = this._initialCards.link;
     this._popup.querySelector('.popup-img__title').textContent = this._initialCards.name;
     openModal(this._popup);
-    popupImagesClose();
   }
 }
