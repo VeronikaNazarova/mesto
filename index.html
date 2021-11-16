@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="body">
   <div class="page container">
     <header class="header">
       <a href="#" target="_self">
-        <img src="./images/Vector.svg" alt="логотип" class="header__logo">
+        <img src="<%=require('./images/Vector.svg')%>" alt="логотип" class="header__logo">
       </a>
     </header>
     <main class="content">
       <section class="profile">
-        <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="аватар" class="profile__avatar">
         <div class="profile__info">
           <div class="profile__inner">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -33,9 +32,9 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup overlay">
-    <form name="popup-form" class="popup__container" novalidate>
-      <button type="button" class="popup__icon"><img src="./images/CloseIcon.png" alt="закрыть" class="popup-close"></button>
+  <div class="popup popup_profile overlay">
+    <form name="popup-form" class="popup__form popup__container" novalidate>
+      <button type="button" class="popup__icon"><img src="<%=require('./images/CloseIcon.png')%>" alt="закрыть" class="popup-close"></button>
       <h4 class="popup__title">Редактировать профиль</h4>
       <input id="name-author" type="text" name="name" class="popup__input popup__error" minlength="2" maxlength="40" required>
       <span id="name-author-error" class="error error_top"></span>
@@ -45,8 +44,8 @@
     </form>
   </div>
   <div class="popup popupAdd overlayAdd">
-    <form name="popupAdd-form" class="popupAdd__container" novalidate>
-      <button type="button" class="popupAdd__icon"><img src="./images/CloseIcon.png" alt="закрыть" class="popup-close"></button>
+    <form name="popupAdd-form" class="popup__form popupAdd__container" novalidate>
+      <button type="button" class="popup__icon"><img src="<%=require('./images/CloseIcon.png')%>" alt="закрыть" class="popup-close"></button>
       <h4 class="popupAdd__title">Новое место</h4>
       <input id="name-card" placeholder="Название" type="text" name="name" class="popup__input popupAdd__input-name popup__error" minlength="2" maxlength="30" required>
       <span id="name-card-error" class="error error_top"></span>
@@ -57,7 +56,7 @@
   </div>
   <div class="popup popup-photo overlay-photo">
     <div class="popup-img">
-      <button type="button" class="popup-img__icon"><img src="./images/CloseIcon.png" alt="закрыть" class="popup-close"></button>
+      <button type="button" class="popup__icon"><img src="<%=require('./images/CloseIcon.png')%>" alt="закрыть" class="popup-close"></button>
       <img src="#" alt="фото" class="popup-img__inner">
       <p class="popup-img__title"></p>
     </div>
@@ -67,13 +66,11 @@
     <a href="#" class="element__link"><img src="#" alt="фото" class="element__image"></a>
     <div class="element__inner">
       <h2 class="element__title"></h2>
-      <button type="button" class="element__like"><img src="./images/like.svg" alt="лайк"></button>
-      <button type="button" class="element__delete"><img src="./images/delete.png" alt="удалить"></button>
+      <button type="button" class="element__like"><img src="<%=require('./images/like.svg')%>" alt="лайк"></button>
+      <button type="button" class="element__delete"><img src="<%=require('./images/delete.png')%>" alt="удалить"></button>
     </div>
   </div>
 </template>
-
-<script type="module" src="./script/script.js"></script>
-
+  <script type="module" src="../script/pages/script.js"></script>
 </body>
 </html>
