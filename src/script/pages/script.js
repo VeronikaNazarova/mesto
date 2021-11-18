@@ -7,9 +7,10 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
+import {configClassValidate} from "../components/FormValidator.js";
 
 //from utils
-import {popupPhoto, initialCards, cardItem, formAdd, popupAdd, profileTitle, profileSubTitle, buttonEdit, buttonAdd} from "../utils/constants.js";
+import {initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto} from "../utils/constants.js";
 
 
 //popupWithImage
@@ -20,14 +21,16 @@ popupWithImage.setEventListeners();
 
 //CARD
 
-function handleCardOpen() {
-  popupWithImage.openModal();
+function handleCardOpen(link, name) {
+  popupWithImage.openModal(link, name);
 }
 
 
 function createCard(item) {
   return new Card(item, '.template', handleCardOpen).render();
 }
+
+
 
 const createCardDomNode = (evt) => {
   evt.preventDefault();
@@ -37,7 +40,7 @@ const createCardDomNode = (evt) => {
   }
   cardList.addItem(createCard(data));
   evt.currentTarget.reset();
-  closeModal(popupAdd);
+  userAddPopup.closeModal();
  } 
 
 const cardList = new Section({
@@ -55,7 +58,7 @@ cardList.renderItems();
 
 //userInfo
 
-const userInfo = new UserInfo({nameSelector: profileTitle, descriptionSelector: profileSubTitle});
+const userInfo = new UserInfo({nameSelector: '.profile__title', descriptionSelector: '.profile__subtitle'});
 
 userInfo.setUserInfo({name: 'Жак-Ив Кусто', description: 'Исследователь океана'});
 
@@ -70,12 +73,9 @@ function userFormSubmit(data) {
   userProfilePopup.closeModal();
 }
 
-function cardFormSubmit({name, image}) {
-createCard({
-   name,
-   link: image
-  });
-  cardList.addItem(createCard(data));
+
+function cardFormSubmit() {
+  cardList.addItem(createCard(item));
   userAddPopup.closeModal();
   formValidatorAdd.disableButton();
 }

@@ -1,4 +1,4 @@
-const configClassValidate = {
+export const configClassValidate = {
     formSelector: 'form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
@@ -36,7 +36,7 @@ export default class FormValidator {
   
   disableButton = () => {
     this._submitButton.classList.add(this._inactiveButtonClass);
-    this._submitButton.setAttribute('disabled', true);
+    this._submitButton.setAttribute('disabled', 'disabled');
   }
 
   _setInputListeners = () => {
