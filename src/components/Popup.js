@@ -1,4 +1,3 @@
-import {popupClose} from '../pages/script.js';
 
 export default class Popup {
   constructor(popupSelector) {

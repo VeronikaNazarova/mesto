@@ -10,7 +10,6 @@ export default class PopupWithForm extends Popup {
 
   closeModal() {
     super.closeModal();
-    this._form.reset();
   }
 
   _getInputValues() {

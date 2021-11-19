@@ -1,4 +1,4 @@
-import "../../pages/index.css";
+import "./index.css";
 
 //from components
 import Card from "../components/Card.js";
@@ -10,7 +10,7 @@ import FormValidator from "../components/FormValidator.js";
 import {configClassValidate} from "../components/FormValidator.js";
 
 //from utils
-import {initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto} from "../utils/constants.js";
+import {popupAddForm, initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto} from "../utils/constants.js";
 
 
 //popupWithImage
@@ -64,20 +64,25 @@ userInfo.setUserInfo({name: 'Жак-Ив Кусто', description: 'Исслед
 
 userInfo.updateUserInfo();
 
-const userProfilePopup = new PopupWithForm(profilePopup, userFormSubmit);
-const userAddPopup = new PopupWithForm(popupAdd, cardFormSubmit);
+const userProfilePopup = new PopupWithForm(profilePopup, submitUserForm);
+const userAddPopup = new PopupWithForm(popupAdd, submitCardForm);
 
-function userFormSubmit(data) {
+function submitUserForm(data) {
   userInfo.setUserInfo(data);
   userInfo.updateUserInfo();
   userProfilePopup.closeModal();
 }
 
 
-function cardFormSubmit() {
-  cardList.addItem(createCard(item));
+function submitCardForm({name, image}) {
+  createCard({
+    name,
+    link: image
+  });
+  cardList.addItem(createCard());
   userAddPopup.closeModal();
   formValidatorAdd.disableButton();
+  popupAddForm.reset();
 }
 
 buttonEdit.addEventListener('click', function() {
@@ -85,8 +90,9 @@ buttonEdit.addEventListener('click', function() {
 })
 
 buttonAdd.addEventListener('click', function() {
-  userAddPopup.openModal();
   formValidatorAdd.disableButton();
+  userAddPopup.openModal();
+  
 })
 
 userProfilePopup.setEventListeners();

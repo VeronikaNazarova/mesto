@@ -13,8 +13,8 @@ export default class UserInfo {
     }
   }
   setUserInfo({name, description}) {
-    name && (this._name = name);
-    description && (this._description = description);
+    this._name = name;
+    this._description = description;
   }
 
   updateUserInfo() {

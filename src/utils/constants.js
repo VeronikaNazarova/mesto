@@ -1,7 +1,6 @@
 export const cardItem = document.querySelector('.elements');
 export const popupPhoto = document.querySelector('.popup-photo');
 export const buttonEdit = document.querySelector('.profile__button-edit');
-const popupClose = document.querySelector('.popup__icon');
 export const profilePopup = document.querySelector('.popup_profile');
 const popupInputName = document.querySelector('[name=name]');
 const popupInputDescription = document.querySelector('[name=description]');
@@ -10,6 +9,8 @@ const formElement = document.querySelector('[name="popup-form"]');
 export const buttonAdd = document.querySelector('.profile__button-add');
 export const popupAdd = document.querySelector('.popupAdd');
 export const formAdd = document.querySelector('[name="popupAdd-form"]');
+export const popupAddForm = document.querySelector('.popupAdd-form');
+
 
 
 export const initialCards = [
