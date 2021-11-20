@@ -10,7 +10,7 @@ import FormValidator from "../components/FormValidator.js";
 import {configClassValidate} from "../components/FormValidator.js";
 
 //from utils
-import {popupAddForm, initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto} from "../utils/constants.js";
+import {popupInputDescription, popupInputName, initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto} from "../utils/constants.js";
 
 
 //popupWithImage
@@ -31,18 +31,6 @@ function createCard(item) {
 }
 
 
-
-const createCardDomNode = (evt) => {
-  evt.preventDefault();
-  const data = {
-    name: document.querySelector('.popupAdd__input-name').value,
-    link: document.querySelector('.popupAdd__input-image').value
-  }
-  cardList.addItem(createCard(data));
-  evt.currentTarget.reset();
-  userAddPopup.closeModal();
- } 
-
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -52,7 +40,6 @@ const cardList = new Section({
 },
 cardItem);
 
-formAdd.addEventListener('submit', createCardDomNode);
 
 cardList.renderItems();
 
@@ -75,17 +62,20 @@ function submitUserForm(data) {
 
 
 function submitCardForm({name, image}) {
-  createCard({
+  const newCard = createCard({
     name,
     link: image
   });
-  cardList.addItem(createCard());
+  cardList.addItem(newCard);
   userAddPopup.closeModal();
   formValidatorAdd.disableButton();
-  popupAddForm.reset();
+  formAdd.reset();
 }
 
 buttonEdit.addEventListener('click', function() {
+  const dataUser = userInfo.getUserInfo();
+  popupInputName.value = dataUser.name;
+  popupInputDescription.value = dataUser.description;
   userProfilePopup.openModal();
 })
 

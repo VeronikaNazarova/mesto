@@ -1,7 +1,7 @@
 .popup__icon {
   position: absolute;
   top: -50px;
-  left: 416px;
+  right: -60px;
   background: none;
   border: none;
 }
@@ -12,6 +12,6 @@
 
 @media screen  and (min-width: 320px) and (max-width: 568px) {
   .popup__icon {
-    left: 240px;
+    right: -10px;
   }
 }
