@@ -69,7 +69,6 @@ function submitCardForm({name, image}) {
   cardList.addItem(newCard);
   userAddPopup.closeModal();
   formValidatorAdd.disableButton();
-  formAdd.reset();
 }
 
 buttonEdit.addEventListener('click', function() {
