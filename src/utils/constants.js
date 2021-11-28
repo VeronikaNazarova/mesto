@@ -4,12 +4,15 @@ export const buttonEdit = document.querySelector('.profile__button-edit');
 export const profilePopup = document.querySelector('.popup_profile');
 export const popupInputName = document.querySelector('[name=name]');
 export const popupInputDescription = document.querySelector('[name=description]');
+export const popupInputAvatar = document.querySelector('[name=avatar]');
 
 export const buttonAdd = document.querySelector('.profile__button-add');
+export const linkAvatar = document.querySelector('.avatar');
+export const imgAvatar = document.querySelector('.avatar-hover');
 export const popupAdd = document.querySelector('.popupAdd');
+export const popupAvatar = document.querySelector('.popup-avatar');
 export const formAdd = document.querySelector('[name="popupAdd-form"]');
-
-
+export const popupDelete = document.querySelector('.popup-delete');
 
 export const initialCards = [
   {

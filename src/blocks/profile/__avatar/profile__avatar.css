@@ -1,24 +1,6 @@
 .profile__avatar {
   width: 127px;
   height: 127px;
-  margin: 37px 20px 47px 0;
   border-radius: 50%;
-  object-fit: cover;
-  grid-row-start: 1;
-  grid-row-end: 3;
-  
 }
 
-@media screen and (max-width: 767px) {
-  .profile__avatar {
-    grid-row-end: 2;
-    margin-left: 44px;
-    margin-bottom: 0;
-  }
-}
-
-@media screen  and (max-width: 432px) {
-  .profile__avatar {
-    margin: 38px auto 22px;
-  }
-}

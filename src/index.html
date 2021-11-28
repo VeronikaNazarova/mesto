@@ -15,10 +15,13 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="аватар" class="profile__avatar">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <a href="#" class="avatar">
+            <img src="<%=require('./images/avatar.jpg')%>" alt="аватар" class="profile__avatar">
+            <img src="<%=require('./images/avatar-hover.svg')%>" alt="" class="avatar-hover">
+          </a>
+          <h1 class="profile__title"></h1>
           <button type="button" class="profile__button-edit"></button>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle"></p>
         </div>
         <button type="button" class="profile__button-add"></button>
       </section>
@@ -59,12 +62,31 @@
       <p class="popup-img__title"></p>
     </div>
   </div>
+  <div class="popup popup-delete">
+    <form class="popup__form popup__delete" novalidate>
+    <button type="button" class="popup__icon"><img src="<%=require('./images/CloseIcon.png')%>" alt="закрыть" class="popup-close"></button>
+    <h4 class="popup__title">Вы уверены?</h4>
+    <button type="submit" class="popup__button popup-delete__button" value="Сохранить">Да</button>
+    </form>
+  </div>
+  <div class="popup popup-avatar">
+    <form name="popup-avatar" class="popup__form popup__avatar" novalidate>
+      <button type="button" class="popup__icon"><img src="<%=require('./images/CloseIcon.png')%>" alt="закрыть" class="popup-close"></button>
+      <h4 class="popup__title">Обновить аватар</h4>
+      <input id="link" placeholder="Ссылка на картинку" type="url" name="avatar" class="popup__input popup__error" required>
+      <span id="link-error" class="error error_bottom"></span>
+      <button type="submit" class="popup__button popup__button_invalid" value="Сохранить">Сохранить</button>
+    </form>
+  </div>
 <template class="template">
   <div class="element">
     <a href="#" class="element__link"><img src="#" alt="фото" class="element__image"></a>
     <div class="element__inner">
       <h2 class="element__title"></h2>
-      <button type="button" class="element__like"><img src="<%=require('./images/like.svg')%>" alt="лайк"></button>
+      <div class="elements__like">
+        <button type="button" class="element__like"><img src="<%=require('./images/like.svg')%>" alt="лайк"></button>
+        <p class="element__number">0</p>
+      </div>
       <button type="button" class="element__delete"><img src="<%=require('./images/delete.png')%>" alt="удалить"></button>
     </div>
   </div>

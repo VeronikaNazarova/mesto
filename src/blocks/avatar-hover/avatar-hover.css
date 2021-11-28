@@ -1,0 +1,11 @@
+.avatar-hover {
+  position: absolute;
+  opacity: 0;
+  padding: 53px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.avatar-hover:hover {
+  opacity: 1;
+}

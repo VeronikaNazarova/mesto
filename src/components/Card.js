@@ -1,11 +1,18 @@
 
 export default class Card {
   
-  constructor(data, template, handle) {
+  constructor({data, handleCardClick, handleLikeClick, handleCardDelete}, template) {
+    this._likes = data.likes;
     this._name = data.name;
     this._link = data.link;
+    this.id = data._id;
+    this._realUserId = data.realUserId;
+    
+    this.handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleCardDelete = handleCardDelete;
+
     this._template = template;
-    this.handle = handle;
   }
   _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
@@ -24,6 +31,9 @@ export default class Card {
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
     this._setEventListeners();
+    this._updateLikesView();
+    
+    
   
     // Добавим данные
     this._image = this._element.querySelector('.element__image');
@@ -39,21 +49,37 @@ export default class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._handleCardClick();
+      this._handleLikeClick(this);
     });
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._handleCardDelete();
+      this._handleCardDelete(this);
     });
     this._element.querySelector('.element__link').addEventListener('click', () => {
-      this.handle(this._link, this._name);
+      this.handleCardClick(this._link, this._name);
     });
+    
   }
 
-  _handleCardClick() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+  isLiked() {
+    return this._likes.some(user => user._id === this._realUserId)
   }
 
-  _handleCardDelete() {
-    this._element.querySelector('.element__delete').closest('.element').remove();
+  setLikes(dataLikes) {
+    this._likes = dataLikes;
+    this._updateLikesView();
+  }
+
+  _updateLikesView() {
+    if(!this.isLiked()){
+      this._element.querySelector('.element__like').classList.remove('element__like_active');
+    }
+    else {
+      this._element.querySelector('.element__like').classList.add('element__like_active');
+    }
+  }
+
+
+  removeCard() {
+    this._element.remove();
   }
 }
