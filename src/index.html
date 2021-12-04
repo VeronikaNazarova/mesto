@@ -73,8 +73,8 @@
     <form name="popup-avatar" class="popup__form popup__avatar" novalidate>
       <button type="button" class="popup__icon"><img src="<%=require('./images/CloseIcon.png')%>" alt="закрыть" class="popup-close"></button>
       <h4 class="popup__title">Обновить аватар</h4>
-      <input placeholder="Ссылка на картинку" type="url" name="avatar" class="popup__input popup__error" required>
-      <span class="error error_bottom"></span>
+      <input id="avatar-user" placeholder="Ссылка на картинку" type="url" name="avatar" class="popup__input popup__error" required>
+      <span id="avatar-user-error" class="error error_bottom-avatar"></span>
       <button type="submit" class="popup__button popup__button_invalid" value="Сохранить">Сохранить</button>
     </form>
   </div>
@@ -85,7 +85,7 @@
       <h2 class="element__title"></h2>
       <div class="elements__like">
         <button type="button" class="element__like"><img src="<%=require('./images/like.svg')%>" alt="лайк"></button>
-        <p class="element__number">0</p>
+        <p class="element__number"></p>
       </div>
       <button type="button" class="element__delete"><img src="<%=require('./images/delete.png')%>" alt="удалить"></button>
     </div>

@@ -1,0 +1,11 @@
+.error_bottom-avatar {
+  position: absolute;
+  left: 36px;
+}
+
+
+@media screen  and (min-width: 320px) and (max-width: 568px) {
+  .error_bottom-avatar {
+    top: 215px;
+  }
+}

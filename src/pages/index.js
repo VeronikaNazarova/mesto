@@ -25,7 +25,7 @@ const api = new Api({
   }
 })
 
-let userId = null;
+export let userId = null;
 
 Promise.all([api.getCards(), api.getUserInfo()])
   .then(([dataCards, dataUser]) => {
@@ -43,11 +43,11 @@ const popupWithImage = new PopupWithImage(popupPhoto);
 
 popupWithImage.setEventListeners();
 
-const cardDeletePopup = new PopupWithSubmit(popupDelete);
+
 
 //CARD
 
-function handleCardOpen(link, name) {
+function handleCardClick(link, name) {
   popupWithImage.openModal(link, name);
 }
 
@@ -61,9 +61,9 @@ function handleLikeClick (card) {
     .then(dataCard => card.setLikes(dataCard.likes))
   }
   
-  
 }
 
+const cardDeletePopup = new PopupWithSubmit(popupDelete);
 
 function handleCardDelete(card){
   cardDeletePopup.openModal();
@@ -78,7 +78,7 @@ function handleCardDelete(card){
 
 const  createCard = (data) => {
   return new Card({data: {...data, realUserId: userId},
-     handleCardOpen, handleLikeClick, handleCardDelete}, '.template').render();
+     handleCardClick, handleLikeClick, handleCardDelete}, '.template').render();
 }
 
 const cardList = new Section(
@@ -94,15 +94,19 @@ const cardList = new Section(
 
 //userInfo
 
-const userInfo = new UserInfo({ nameSelector: '.profile__title', descriptionSelector: '.profile__subtitle' });
+const userInfo = new UserInfo({ nameSelector: '.profile__title', descriptionSelector: '.profile__subtitle', avatarSelector: '.profile__avatar' });
 
 
 userInfo.updateUserInfo();
 
 function submitUserForm(dataUser) {
+  userProfilePopup.loading(true);
   api.patchUserInfo(dataUser)
   .then( (data) => {
     return userInfo.setUserInfo(data)
+  })
+  .finally(()=> {
+    userProfilePopup.loading(false);
   })
   .catch(function (err) {
     console.log(err);
@@ -116,6 +120,7 @@ const userAddPopup = new PopupWithForm(popupAdd, submitCardForm);
 
 
 function submitCardForm(dataCard) {
+  userAddPopup.loading(true);
   api.addCard(dataCard)
     .then((dataNewCard)=> {
       const newCard = createCard(dataNewCard);
@@ -129,23 +134,17 @@ const userAvatarPopup = new PopupWithForm(popupAvatar, submitAvatarForm);
 
 
 function submitAvatarForm(data) {
-  api.patchAvatar(data)
-  .then(function() {
+  //userAvatarPopup.loading(true);
+  api.patchAvatar()
+  .then(() => {
     return userInfo.setAvatar(data.avatar);
   })
-  .then(() => {
-    
+  // .finally(() => {
+  //   userAvatarPopup.loading(false)
+  // })
     userAvatarPopup.closeModal();
-    formValidatorAvatar.disableButton();
-  })
   
 }
-
-linkAvatar.addEventListener('click', function () {
-  userAvatarPopup.openModal();
-
-})
-
 
 buttonEdit.addEventListener('click', function () {
   const dataUser = userInfo.getUserInfo();
@@ -157,6 +156,12 @@ buttonEdit.addEventListener('click', function () {
 buttonAdd.addEventListener('click', function () {
   formValidatorAdd.disableButton();
   userAddPopup.openModal();
+
+})
+
+linkAvatar.addEventListener('click', function () {
+  formValidatorAvatar.disableButton();
+  userAvatarPopup.openModal();
 
 })
 

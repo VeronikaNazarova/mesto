@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._submitHundler = submitHandler;
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = this._popup.querySelectorAll('.popup__input');
+    this._buttonSelector = this._popup.querySelector('.popup__button');
   }
 
   closeModal() {
@@ -26,6 +27,12 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", () => {
       this._submitHundler(this._getInputValues());
     });
+  }
+
+  loading() {
+    this._form.addEventListener("submit", ()=> {
+      this._buttonSelector.textContent = "Сохранение...";
+    })
   }
 
 }

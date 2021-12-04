@@ -1,7 +1,8 @@
-
+import {userId} from '../pages/index.js';
 export default class Card {
   
   constructor({data, handleCardClick, handleLikeClick, handleCardDelete}, template) {
+    this._data = data;
     this._likes = data.likes;
     this._name = data.name;
     this._link = data.link;
@@ -21,6 +22,13 @@ export default class Card {
       .content
       .querySelector('.element')
       .cloneNode(true);
+
+      if(this._data.owner._id === userId) {
+        console.log(this._data.owner._id)
+      }
+      else {
+        cardElement.querySelector('.element__delete').classList.add('element__delete_remove');
+      }
       
     // вернём DOM-элемент карточки
       return cardElement;
@@ -42,6 +50,13 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = this._name;
     this._title.textContent = this._name;
+
+    if(this._data.likes.length > 0) {
+      this._element.querySelector('.element__number').textContent = this._data.likes.length;
+    }
+    else {
+      this._element.querySelector('.element__number').textContent = 0;
+    }
 
     // Вернём элемент наружу
     return this._element;
@@ -66,6 +81,9 @@ export default class Card {
 
   setLikes(dataLikes) {
     this._likes = dataLikes;
+    if(dataLikes) {
+      this._element.querySelector('.element__number').textContent = dataLikes.length;
+    }
     this._updateLikesView();
   }
 
