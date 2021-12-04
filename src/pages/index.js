@@ -32,8 +32,6 @@ Promise.all([api.getCards(), api.getUserInfo()])
     userId = dataUser._id;
     cardList.renderItems(dataCards);
     userInfo.setUserInfo(dataUser);
-    console.log('Данные карточки', dataCards);
-    console.log('Данные пользователя', dataUser);
   })
 
 
@@ -94,7 +92,9 @@ const cardList = new Section(
 
 //userInfo
 
-const userInfo = new UserInfo({ nameSelector: '.profile__title', descriptionSelector: '.profile__subtitle', avatarSelector: '.profile__avatar' });
+const userInfo = new UserInfo({ nameSelector: '.profile__title', 
+descriptionSelector: '.profile__subtitle', 
+avatarSelector: '.profile__avatar' });
 
 
 userInfo.updateUserInfo();
@@ -134,14 +134,14 @@ const userAvatarPopup = new PopupWithForm(popupAvatar, submitAvatarForm);
 
 
 function submitAvatarForm(data) {
-  //userAvatarPopup.loading(true);
-  api.patchAvatar()
-  .then(() => {
-    return userInfo.setAvatar(data.avatar);
+  userAvatarPopup.loading(true);
+  api.patchAvatar(data)
+  .then((responce) => {
+    return userInfo.setAvatar(responce.avatar);
   })
-  // .finally(() => {
-  //   userAvatarPopup.loading(false)
-  // })
+  .finally(() => {
+    userAvatarPopup.loading(false)
+  })
     userAvatarPopup.closeModal();
   
 }
@@ -151,6 +151,7 @@ buttonEdit.addEventListener('click', function () {
   popupInputName.value = dataUser.name;
   popupInputDescription.value = dataUser.about;
   userProfilePopup.openModal();
+  
 })
 
 buttonAdd.addEventListener('click', function () {

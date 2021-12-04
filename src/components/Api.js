@@ -1,4 +1,3 @@
-import { cardItem } from "../utils/constants";
 
 function onResponce(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res}`);
@@ -74,7 +73,7 @@ export default class Api {
     .then(onResponce)
   }
 
-  patchAvatar(avatar) {
+  patchAvatar({avatar}) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -84,4 +83,6 @@ export default class Api {
     })
     .then(onResponce)
   }
+
+
 }
