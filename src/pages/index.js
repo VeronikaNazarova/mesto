@@ -122,9 +122,12 @@ function submitUserForm(dataUser) {
   .then( (data) => {
     return userInfo.setUserInfo(data)
   })
+  .then(() => {
+    userProfilePopup.closeModal();
+  })
   .finally(()=> {
     userProfilePopup.renderLoading(false);
-    userProfilePopup.closeModal();
+    
   })
   .catch(function (err) {
     console.log(err);
@@ -144,10 +147,12 @@ function submitCardForm(dataCard) {
       const newCard = createCard(dataNewCard);
       cardList.addItem(newCard);  
     })
-    .finally(() => {
-      userAddPopup.renderLoading(false);
+    .then(() => {
       userAddPopup.closeModal();
       formValidatorAdd.disableButton();
+    })
+    .finally(() => {
+      userAddPopup.renderLoading(false);
     })
     .catch(function (err) {
       console.log(err);
@@ -163,9 +168,11 @@ function submitAvatarForm(data) {
   .then((link) => {
     return userInfo.setAvatar(link.avatar);
   })
+  .then(() => {
+    userAvatarPopup.closeModal();
+  })
   .finally(() => {
     userAvatarPopup.renderLoading(false);
-    userAvatarPopup.closeModal();
   })
   .catch(function (err) {
     console.log(err);
