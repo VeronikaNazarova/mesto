@@ -29,10 +29,13 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  loading() {
-    this._form.addEventListener("submit", ()=> {
+  renderLoading(isLoading) {
+    if(isLoading) {
       this._buttonSelector.textContent = "Сохранение...";
-    })
+    }
+    else {
+      this._buttonSelector.textContent = "Сохраненить";
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import {userId} from '../pages/index.js';
+
 export default class Card {
   
   constructor({data, handleCardClick, handleLikeClick, handleCardDelete}, template) {
@@ -23,7 +23,7 @@ export default class Card {
       .querySelector('.element')
       .cloneNode(true);
 
-      if(this._data.owner._id === userId) {
+      if(this._data.owner._id === this._realUserId) {
         console.log(this._data.owner._id)
       }
       else {
@@ -99,5 +99,6 @@ export default class Card {
 
   removeCard() {
     this._element.remove();
+    this._element = null
   }
 }

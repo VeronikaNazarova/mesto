@@ -5,6 +5,7 @@ export default class PopupWithSubmit extends Popup {
     super(popupSelector);
     this._submitHundler = null;
     this._form = this._popup.querySelector('.popup__form');
+    this._buttonSelector = this._popup.querySelector('.popup__button');
   }
 
   addAction(action){
@@ -20,4 +21,12 @@ export default class PopupWithSubmit extends Popup {
     });
   }
 
+  renderLoading(isLoading) {
+    if(isLoading) {
+      this._buttonSelector.textContent = "Сохранение...";
+    }
+    else {
+      this._buttonSelector.textContent = "Да";
+    }
+  }
 }

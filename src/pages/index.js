@@ -8,11 +8,11 @@ import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { configClassValidate } from "../components/FormValidator.js";
+//import { configClassValidate } from "../components/FormValidator.js";
 import Api from "../components/Api";
 
 //from utils
-import {popupDelete, imgAvatar, popupInputAvatar, linkAvatar, popupAvatar, popupInputDescription, popupInputName, initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto } from "../utils/constants.js";
+import {configClassValidate, popupDelete, imgAvatar, popupInputAvatar, linkAvatar, popupAvatar, popupInputDescription, popupInputName, initialCards, cardItem, formAdd, popupAdd, profilePopup, buttonEdit, buttonAdd, popupPhoto } from "../utils/constants.js";
 
 
 //Api
@@ -25,14 +25,18 @@ const api = new Api({
   }
 })
 
-export let userId = null;
+let userId = null;
 
 Promise.all([api.getCards(), api.getUserInfo()])
   .then(([dataCards, dataUser]) => {
     userId = dataUser._id;
     cardList.renderItems(dataCards);
     userInfo.setUserInfo(dataUser);
+    userInfo.setAvatar(dataUser.avatar);
   })
+  .catch(function (err) {
+    console.log(err);
+  });
 
 
 //popupWithImage
@@ -53,10 +57,16 @@ function handleLikeClick (card) {
   if(card.isLiked()){
     api.removeCardLike(card.id)
     .then(dataCard => card.setLikes(dataCard.likes))
+    .catch(function (err) {
+      console.log(err);
+    });
   }
   else {
     api.setCardLike(card.id)
     .then(dataCard => card.setLikes(dataCard.likes))
+    .catch(function (err) {
+      console.log(err);
+    });
   }
   
 }
@@ -66,11 +76,19 @@ const cardDeletePopup = new PopupWithSubmit(popupDelete);
 function handleCardDelete(card){
   cardDeletePopup.openModal();
   cardDeletePopup.addAction(() => {
+    cardDeletePopup.renderLoading(true);
     api.removeCard(card.id)
       .then(() => {
         card.removeCard();
-        cardDeletePopup.closeModal()
+        cardDeletePopup.closeModal();
       })
+      .finally(()=> {
+        cardDeletePopup.renderLoading(false);
+        
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   })
 }
 
@@ -97,21 +115,21 @@ descriptionSelector: '.profile__subtitle',
 avatarSelector: '.profile__avatar' });
 
 
-userInfo.updateUserInfo();
 
 function submitUserForm(dataUser) {
-  userProfilePopup.loading(true);
+  userProfilePopup.renderLoading(true);
   api.patchUserInfo(dataUser)
   .then( (data) => {
     return userInfo.setUserInfo(data)
   })
   .finally(()=> {
-    userProfilePopup.loading(false);
+    userProfilePopup.renderLoading(false);
+    userProfilePopup.closeModal();
   })
   .catch(function (err) {
     console.log(err);
   });
-    userProfilePopup.closeModal();
+    
   }
 
 
@@ -120,31 +138,43 @@ const userAddPopup = new PopupWithForm(popupAdd, submitCardForm);
 
 
 function submitCardForm(dataCard) {
-  userAddPopup.loading(true);
+  userAddPopup.renderLoading(true);
   api.addCard(dataCard)
     .then((dataNewCard)=> {
       const newCard = createCard(dataNewCard);
       cardList.addItem(newCard);  
+    })
+    .finally(() => {
+      userAddPopup.renderLoading(false);
       userAddPopup.closeModal();
       formValidatorAdd.disableButton();
     })
+    .catch(function (err) {
+      console.log(err);
+    });
   }
 
 const userAvatarPopup = new PopupWithForm(popupAvatar, submitAvatarForm);
 
 
 function submitAvatarForm(data) {
-  userAvatarPopup.loading(true);
+  userAvatarPopup.renderLoading(true);
   api.patchAvatar(data)
-  .then((responce) => {
-    return userInfo.setAvatar(responce.avatar);
+  .then((link) => {
+    return userInfo.setAvatar(link.avatar);
   })
   .finally(() => {
-    userAvatarPopup.loading(false)
-  })
+    userAvatarPopup.renderLoading(false);
     userAvatarPopup.closeModal();
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
+    
   
 }
+
+
 
 buttonEdit.addEventListener('click', function () {
   const dataUser = userInfo.getUserInfo();
@@ -152,19 +182,21 @@ buttonEdit.addEventListener('click', function () {
   popupInputDescription.value = dataUser.about;
   userProfilePopup.openModal();
   
-})
+});
+
 
 buttonAdd.addEventListener('click', function () {
   formValidatorAdd.disableButton();
   userAddPopup.openModal();
 
-})
+});
 
 linkAvatar.addEventListener('click', function () {
   formValidatorAvatar.disableButton();
   userAvatarPopup.openModal();
-
 })
+
+
 
 
 userAvatarPopup.setEventListeners();

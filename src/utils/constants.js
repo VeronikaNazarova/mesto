@@ -14,6 +14,15 @@ export const popupAvatar = document.querySelector('.popup-avatar');
 export const formAdd = document.querySelector('[name="popupAdd-form"]');
 export const popupDelete = document.querySelector('.popup-delete');
 
+export const configClassValidate = {
+  formSelector: 'form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_invalid',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error'
+};
+
 export const initialCards = [
   {
     name: 'Архыз',

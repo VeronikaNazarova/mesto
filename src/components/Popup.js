@@ -32,4 +32,5 @@ export default class Popup {
       this.closeModal();
     })
   }
+
 } 

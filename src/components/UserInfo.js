@@ -19,11 +19,6 @@ export default class UserInfo {
 
   }
 
-  updateUserInfo() {
-    this._nameElement.textContent = this._name;
-    this._descriptionElement.textContent = this._description;
-  }
-
   setAvatar(avatar) {
     if(avatar) {
       this._avatar.src = `${avatar}`;
